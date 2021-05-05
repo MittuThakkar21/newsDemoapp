@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-// import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { deleteNews } from '../Actions/Action'
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 // import { fetchNewsData } from '../Actions/Action';
-// import Search from './Search';
+import Search from './Search';
 import JSONDATA from '../Data/data.json'
 import ReactPaginate from 'react-paginate';
 
@@ -15,20 +15,20 @@ const Home = ({ news }) => {
     const PER_PAGE = 5;
     const dispatch = useDispatch();
 
-    const [data, setData] = useState(JSONDATA);
+    // const [data, setData] = useState(JSONDATA);
     const [currentPage, setCurrentPage] = useState(0);
 
     const offset = currentPage * PER_PAGE;
-    const pageCount = Math.ceil(data.length / PER_PAGE);
+    const pageCount = Math.ceil(news.length / PER_PAGE);
 
     function handlePageClick({ selected: selectedPage }) {
         setCurrentPage(selectedPage);
     }
 
-    useEffect(() => {
-        // fetchNewsData()
-        setData(JSONDATA)
-    }, [])
+    // useEffect(() => {
+    //     // fetchNewsData()
+    //     setData(JSONDATA)
+    // }, [])
 
     return (
         news.loading ? (
@@ -40,7 +40,7 @@ const Home = ({ news }) => {
                 <h2>HOME PAGE</h2>
                 <Link to='/add'><button type="button">Add</button></Link><br /><br />
 
-                {/* <Search /> */}
+                <Search />
                 <table className="table">
                     <thead>
                         <tr>
@@ -53,7 +53,7 @@ const Home = ({ news }) => {
                         </tr>
                     </thead>
 
-                    {JSONDATA.slice(offset, offset + PER_PAGE).map((ele = {}, id) => {
+                    {news.slice(offset, offset + PER_PAGE).map((ele = {}, id) => {
                         {/* console.log(JSONDATA) */ }
                         return (
                             <tr key={ele.id}>

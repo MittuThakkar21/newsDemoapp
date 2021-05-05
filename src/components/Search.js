@@ -13,12 +13,12 @@ const Search = () => {
     const [endDate, setEndDate] = useState(new Date());
     const [isFilter, setIsFilter] = useState(false);
 
-    const dispatch = UseDispatch();
+    const dispatch = useDispatch();
     // console.log('start date' ,startDate);
     const renderFilterData = () => {
         let filteredData = JSONDATA.filter((val) => {
 
-            if (searchtitle === "") {
+            if (searchtitle == "") {
                 return val
             } else if (val.title.toLowerCase().includes(searchtitle.toLowerCase())) {
                 return val
