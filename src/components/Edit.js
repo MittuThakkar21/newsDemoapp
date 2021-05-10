@@ -34,7 +34,8 @@ const Edit = ({ location }) => {
     const { id } = useParams();
     // alert(id)
 
-    const { title, author, name, publishedAt, phnumber, nid } = news || {}
+    const { title, author, name, publishedAt, nid, phnumber } = news || {}
+    // console.log('num', phnumber);
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -44,7 +45,7 @@ const Edit = ({ location }) => {
     }, [])
 
     const onUpdate = (values) => {
-        // console.log('values', values);
+        console.log('values', values);
         const updatedData = {
             id: nid,
             title: values.title,
@@ -130,10 +131,11 @@ const Edit = ({ location }) => {
                                     const { push, remove, form } = fieldArrayProps
                                     const { values } = form
                                     const { phnumbers } = values
-                                    {/* console.log('field array props', fieldArrayProps) */ }
+
+                                    console.log(' phnumbers', phnumbers)
                                     return <div>
                                         {
-                                            phnumbers.map((index) => (
+                                            phnumbers.map((phnumber, index) => (
                                                 <div key={index}>
                                                     <Field name={`phnumbers.${index}`} />
                                                     {

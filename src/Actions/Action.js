@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ADD_NEWS, DELETE_NEWS, FETCH_NEWS_ERROR, FETCH_NEWS_PENDING, FETCH_NEWS_SUCCESS, GET_NEWS, UPDATE_NEWS } from '../constants/constant';
+import { ADD_NEWS, CLEAR_ALL, DELETE_NEWS, DELETE_SELECTED_DATA, FETCH_NEWS_ERROR, FETCH_NEWS_PENDING, FETCH_NEWS_SUCCESS, GET_NEWS, SELECT_ALL, UPDATE_NEWS } from '../constants/constant';
 
 
 export function addNews(news) {
@@ -29,12 +29,38 @@ export const updateNews = (news) => {
 
 
 export const deleteNews = (id) => {
-    // console.log('delete', id);
+    console.log('delete', id);
     return {
         type: DELETE_NEWS,
         payload: id
     }
 }
+
+//delete selected
+export const deleteAllData = () => {
+    return {
+        type: DELETE_SELECTED_DATA
+    }
+}
+
+//select all
+
+export const selectAllData = (id) => {
+    return {
+        type: SELECT_ALL,
+        payload: id
+    }
+}
+
+
+//clear all
+export const clearAllData = () => {
+    return {
+        type: CLEAR_ALL
+    }
+}
+
+
 
 
 

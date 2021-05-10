@@ -1,12 +1,14 @@
-import { ADD_NEWS, DELETE_NEWS, FETCH_NEWS_ERROR, FETCH_NEWS_PENDING, FETCH_NEWS_SUCCESS, GET_NEWS, UPDATE_NEWS } from "../constants/constant"
+import { ADD_NEWS, CLEAR_ALL, DELETE_NEWS, DELETE_SELECTED_DATA, FETCH_NEWS_ERROR, FETCH_NEWS_PENDING, FETCH_NEWS_SUCCESS, GET_NEWS, SELECT_ALL, UPDATE_NEWS } from "../constants/constant"
 
 const initialstate = {
     loading: false,
     error: '',
-    news: []
+    news: [],
+    selectedAll: []
 }
 
 const Reducer = (state = initialstate, action) => {
+    // console.log('action', action);
     switch (action.type) {
         case ADD_NEWS:
             // console.log('action', action.payload);
@@ -31,7 +33,25 @@ const Reducer = (state = initialstate, action) => {
             // console.log('action', action.payload);
             return {
                 ...state,
-                news: state.news.filter((news, id) => id !== action.payload)
+                news: state.news.filter((n) => n.id !== action.payload)
+            }
+
+        case DELETE_SELECTED_DATA:
+            return {
+                ...state,
+                news: []
+            }
+
+        case SELECT_ALL:
+            return {
+                ...state,
+                selectedAll: action.payload
+            }
+
+        case CLEAR_ALL:
+            return {
+                ...state,
+                selectedAll: []
             }
 
         case FETCH_NEWS_PENDING:

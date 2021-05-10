@@ -5,13 +5,28 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
 import { deleteNews } from '../Actions/Action'
 import JSONDATA from '../Data/data.json'
+import ReactPaginate from 'react-paginate';
+
 
 const Search = () => {
+
+    const PER_PAGE = 5;
 
     const [searchtitle, setsearchTitle] = useState("");
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [isFilter, setIsFilter] = useState(false);
+
+    // const [data, setData] = useState(JSONDATA);
+    const [currentPage, setCurrentPage] = useState(0);
+
+
+    const offset = currentPage * PER_PAGE;
+    const pageCount = Math.ceil(JSONDATA.length / PER_PAGE);
+
+    function handlePageClick({ selected: selectedPage }) {
+        setCurrentPage(selectedPage);
+    }
 
     const dispatch = useDispatch();
     // console.log('start date' ,startDate);
@@ -34,6 +49,8 @@ const Search = () => {
                 return publishedAt.isSameOrAfter(sdate) && publishedAt.isSameOrBefore(edate)
             })
         }
+        filteredData = filteredData.slice(offset, offset + PER_PAGE)
+
         // console.log('filter data', filteredData);
         filteredData = filteredData.map((data = {}, id) => {
             const publish = moment(data.publishedAt).format('MMMM Do YYYY, h:mm:ss a')
@@ -41,7 +58,6 @@ const Search = () => {
             {/* console.log(data) */ }
             return (
                 <>
-                    {/* <h2>Search</h2> */}
                     <tr key={data.id}>
                         <td>{data.title}</td>
                         <td>{data.author}</td>
@@ -52,7 +68,6 @@ const Search = () => {
                         <button>Edit</button>
                         <button onClick={() => dispatch(deleteNews(id))} >Delete</button>
                     </tr>
-
                 </>
             )
 
@@ -60,13 +75,9 @@ const Search = () => {
         return filteredData;
     }
 
-
-
-
     const filterData = () => {
         setIsFilter(true)
     }
-
 
     return (
         <div>
@@ -76,7 +87,7 @@ const Search = () => {
                     <DatePicker
                         selected={endDate}
                         onChange={date => setEndDate(date)}
-                        minDate={new Date()}
+                    // minDate={new Date()}
                     />
                     <button onClick={filterData}>Filter</button>
                 </div><br />
@@ -96,13 +107,17 @@ const Search = () => {
                         <th scope="col">Author</th>
                         <th scope="col">Name</th>
                         <th scope="col">PublishedAt</th>
-                        {/* <th scope="col">Phone Numbers</th> */}
+                        <th scope="col">Phone Numbers</th>
 
                     </tr>
                 </thead>
                 {renderFilterData()}
 
             </table>
+            <ReactPaginate
+                pageCount={pageCount}
+                onPageChange={handlePageClick}
+            />
         </div>
     )
 
