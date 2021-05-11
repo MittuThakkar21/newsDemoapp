@@ -9,26 +9,11 @@ import moment from 'moment';
 
 
 const Home = ({ news, fetchNewsData }) => {
+
     const [selectAll, setSelectAll] = useState(false);
     const [ischeck, setischeck] = useState([]);
+
     const dispatch = useDispatch();
-
-    // const selectedAll = useSelector(state => state.news.selectedAll)
-    // console.log('selectall', selectAll);
-    // console.log('isCheck', ischeck);
-
-    // console.log('news in container', news);
-
-    // useEffect(() => {
-    //     // fetchNewsData()
-    //     if (selectAll) {
-    //         dispatch(selectAllData(news.map(data => data.id)))
-    //     }
-    //     else {
-    //         dispatch(clearAllData())
-    //     }
-
-    // }, [selectAll])
 
     const onCheckBoxClick = (id) => {
         if (ischeck.includes(id)) {
@@ -92,11 +77,8 @@ const Home = ({ news, fetchNewsData }) => {
                     </thead>
 
                     {news.map((ele = {}) => {
-                        {/* console.log(news) */ }
                         const id = ele.id
-                        {/* console.log('id is', id) */ }
                         const publish = moment(ele.publishedAt).format('MMMM Do YYYY, h:mm:ss a')
-                        {/* console.log('ff', ischeck.includes(id)) */ }
                         return (
                             <>
 
@@ -146,7 +128,6 @@ const Home = ({ news, fetchNewsData }) => {
 }
 
 const mapStateToProps = state => {
-    // console.log('state toprops', state, 'news', state.news.news);
     return {
         news: state.news.news
 

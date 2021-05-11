@@ -1,4 +1,4 @@
-import { ADD_NEWS, CLEAR_ALL, DELETE_NEWS, DELETE_SELECTED_DATA, FETCH_NEWS_ERROR, FETCH_NEWS_PENDING, FETCH_NEWS_SUCCESS, GET_NEWS, SELECT_ALL, UPDATE_NEWS } from "../constants/constant"
+import { ADD_NEWS, DELETE_NEWS, DELETE_SELECTED_DATA, FETCH_NEWS_ERROR, FETCH_NEWS_PENDING, FETCH_NEWS_SUCCESS, GET_NEWS, UPDATE_NEWS } from "../constants/constant"
 
 const initialstate = {
     loading: false,
@@ -23,7 +23,7 @@ const Reducer = (state = initialstate, action) => {
             }
 
         case UPDATE_NEWS:
-            console.log('in update reducer', action.payload);
+            // console.log('in update reducer', action.payload);
             return {
                 ...state,
                 news: state.news.map((n, id) => n.id === action.payload.id ? action.payload : news)
@@ -42,17 +42,6 @@ const Reducer = (state = initialstate, action) => {
                 news: []
             }
 
-        // case SELECT_ALL:
-        //     return {
-        //         ...state,
-        //         selectedAll: action.payload
-        //     }
-
-        // case CLEAR_ALL:
-        //     return {
-        //         ...state,
-        //         selectedAll: []
-        //     }
 
         case FETCH_NEWS_PENDING:
             // console.log('in pending case' , action.payload);
@@ -83,6 +72,4 @@ const Reducer = (state = initialstate, action) => {
 }
 
 export default Reducer
-// export const getNews = state => state.news;
-// export const getNewsPending = state => state.loading;
-// export const getNewsError = state => state.error;
+

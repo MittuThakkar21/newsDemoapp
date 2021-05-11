@@ -30,12 +30,9 @@ const MyTextInput = ({ label, ...rest }) => {
 
 const Edit = ({ location }) => {
     const news = location.news
-    // console.log("in edit component", news);
     const { id } = useParams();
-    // alert(id)
 
     const { title, author, name, publishedAt, nid, phnumber } = news || {}
-    // console.log('num', phnumber);
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -45,7 +42,6 @@ const Edit = ({ location }) => {
     }, [])
 
     const onUpdate = (values) => {
-        console.log('values', values);
         const updatedData = {
             id: nid,
             title: values.title,
@@ -54,9 +50,8 @@ const Edit = ({ location }) => {
             publishedAt: values.publishedAt,
             phnumbers: values.phnumbers
         }
-        console.log('updated_data', updatedData);
         dispatch(updateNews(updatedData))
-        history.push('/')
+
     }
 
     return (
@@ -91,7 +86,6 @@ const Edit = ({ location }) => {
 
                 })}
                 onSubmit={(values) => {
-                    // alert(JSON.stringify(values))
                     onUpdate(values)
                 }}
             >
@@ -132,7 +126,6 @@ const Edit = ({ location }) => {
                                     const { values } = form
                                     const { phnumbers } = values
 
-                                    console.log(' phnumbers', phnumbers)
                                     return <div>
                                         {
                                             phnumbers.map((phnumber, index) => (
