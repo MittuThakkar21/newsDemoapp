@@ -54,7 +54,7 @@ const Edit = ({ location }) => {
             publishedAt: values.publishedAt,
             phnumbers: values.phnumbers
         }
-        // console.log('updated_data', updatedData);
+        console.log('updated_data', updatedData);
         dispatch(updateNews(updatedData))
         history.push('/')
     }

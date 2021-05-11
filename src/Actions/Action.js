@@ -20,7 +20,7 @@ export function getNews(id) {
 }
 
 export const updateNews = (news) => {
-    // console.log('in update action', news);
+    console.log('in update action', news);
     return {
         type: UPDATE_NEWS,
         payload: news
@@ -43,22 +43,22 @@ export const deleteAllData = () => {
     }
 }
 
-//select all
+// //select all
 
-export const selectAllData = (id) => {
-    return {
-        type: SELECT_ALL,
-        payload: id
-    }
-}
+// export const selectAllData = (id) => {
+//     return {
+//         type: SELECT_ALL,
+//         payload: id
+//     }
+// }
 
 
-//clear all
-export const clearAllData = () => {
-    return {
-        type: CLEAR_ALL
-    }
-}
+// //clear all
+// export const clearAllData = () => {
+//     return {
+//         type: CLEAR_ALL
+//     }
+// }
 
 
 

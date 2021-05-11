@@ -23,10 +23,10 @@ const Reducer = (state = initialstate, action) => {
             }
 
         case UPDATE_NEWS:
-            // console.log('in update reducer', action.payload);
+            console.log('in update reducer', action.payload);
             return {
                 ...state,
-                news: state.news.map((news, id) => id === action.payload.id ? action.payload : news)
+                news: state.news.map((n, id) => n.id === action.payload.id ? action.payload : news)
             }
 
         case DELETE_NEWS:
@@ -42,17 +42,17 @@ const Reducer = (state = initialstate, action) => {
                 news: []
             }
 
-        case SELECT_ALL:
-            return {
-                ...state,
-                selectedAll: action.payload
-            }
+        // case SELECT_ALL:
+        //     return {
+        //         ...state,
+        //         selectedAll: action.payload
+        //     }
 
-        case CLEAR_ALL:
-            return {
-                ...state,
-                selectedAll: []
-            }
+        // case CLEAR_ALL:
+        //     return {
+        //         ...state,
+        //         selectedAll: []
+        //     }
 
         case FETCH_NEWS_PENDING:
             // console.log('in pending case' , action.payload);
