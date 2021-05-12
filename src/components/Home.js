@@ -1,35 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { deleteNews, deleteAllData } from '../Actions/Action'
 import { connect } from 'react-redux';
-import { fetchNewsData } from '../Actions/Action';
-import Search from './Search';
 import moment from 'moment';
 
 
-const Home = ({ news, fetchNewsData }) => {
+const Home = ({ news }) => {
     const [selectAll, setSelectAll] = useState(false);
     const [ischeck, setischeck] = useState([]);
     const dispatch = useDispatch();
 
-    // const selectedAll = useSelector(state => state.news.selectedAll)
-    // console.log('selectall', selectAll);
-    console.log('isCheck', ischeck);
-    // const id = news.map(ele => ele.id)
-    // console.log('id os', id);
-
-
-    // useEffect(() => {
-    //     // fetchNewsData()
-    //     if (selectAll) {
-    //         dispatch(selectAllData(news.map(data => data.id)))
-    //     }
-    //     else {
-    //         dispatch(clearAllData())
-    //     }
-
-    // }, [selectAll])
+    const id = news.map((ele) => ele.id)
 
     const onCheckBoxClick = (id) => {
         if (ischeck.includes(id)) {
@@ -59,7 +41,17 @@ const Home = ({ news, fetchNewsData }) => {
             setischeck([])
         }
     }
-    // console.log('ff', ischeck.includes(id))
+
+    const handleDelete = (id) => {
+
+        if (ischeck == id) {
+
+            const newList = [...ischeck]
+            news.splice(id)
+            setischeck(newList)
+
+        }
+    }
 
     return (
         news.loading ? (
@@ -72,7 +64,7 @@ const Home = ({ news, fetchNewsData }) => {
                 <Link to='/add'><button type="button">Add</button></Link><br /><br />
                 {ischeck.length > 0 ?
                     <>
-                        <button onClick={() => dispatch(deleteAllData())}>Delete All</button>
+                        <button onClick={() => handleDelete(ischeck, id)}>Delete All</button>
 
                         <input type="checkbox"
                             checked={selectAll}
@@ -98,11 +90,8 @@ const Home = ({ news, fetchNewsData }) => {
                     </thead>
 
                     {news.map((ele = {}) => {
-                        {/* console.log(news) */ }
                         const id = ele.id
-                        {/* console.log('id is', id) */ }
                         const publish = moment(ele.publishedAt).format('MMMM Do YYYY, h:mm:ss a')
-                        console.log('fdfdsfff', ischeck.includes(id))
                         return (
                             <>
 
@@ -152,7 +141,6 @@ const Home = ({ news, fetchNewsData }) => {
 }
 
 const mapStateToProps = state => {
-    // console.log('state toprops', state, 'news', state.news.news);
     return {
         news: state.news.news
 
@@ -168,4 +156,3 @@ const mapDispatchToProps = dispatch => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
 
-// export default Home
