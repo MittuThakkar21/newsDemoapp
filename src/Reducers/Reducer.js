@@ -37,6 +37,8 @@ const Reducer = (state = initialstate, action) => {
             }
 
         case DELETE_SELECTED_DATA:
+            // console.log('action', action.payload);
+
             return {
                 ...state,
                 news: []

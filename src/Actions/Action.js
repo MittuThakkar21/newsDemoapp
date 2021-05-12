@@ -43,6 +43,27 @@ export const deleteAllData = () => {
     }
 }
 
+// //select all
+
+// export const selectAllData = (id) => {
+//     return {
+//         type: SELECT_ALL,
+//         payload: id
+//     }
+// }
+
+
+// //clear all
+// export const clearAllData = () => {
+//     return {
+//         type: CLEAR_ALL
+//     }
+// }
+
+
+
+
+
 export function fetchNewsPending() {
     return {
         type: FETCH_NEWS_PENDING
